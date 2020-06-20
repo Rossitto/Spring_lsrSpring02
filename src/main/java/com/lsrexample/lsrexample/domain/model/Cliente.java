@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class Cliente {
@@ -14,11 +15,18 @@ public class Cliente {
     // @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
+    @Size(max = 60)
     private String nome;
 
+    @NotBlank
+    @Email
+    @Size(max = 255)
     @Column(name = "mail")
     private String email;
 
+    @NotBlank
+    @Size(max = 20)
     @Column(name = "telefone")
     private String phone;
 
