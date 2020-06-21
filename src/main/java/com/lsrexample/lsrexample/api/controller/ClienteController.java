@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import com.lsrexample.lsrexample.domain.model.Cliente;
 import com.lsrexample.lsrexample.domain.repository.ClienteRepository;
+import com.lsrexample.lsrexample.domain.service.CadastroClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,11 +28,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/clientes")
 public class ClienteController {
 
+    // acho que essa linha de aixo está sobrando no meu código... mas não sei.
     @PersistenceContext
     private EntityManager manager;
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private CadastroClienteService cadastroCliente;
 
     @GetMapping
     public List<Cliente> listar() {
@@ -52,7 +57,7 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+        return cadastroCliente.salvar(cliente);
     }
 
     @PutMapping("/{clienteId}")
@@ -63,7 +68,7 @@ public class ClienteController {
         }
 
         cliente.setId(clienteId);
-        cliente = clienteRepository.save(cliente);
+        cliente = cadastroCliente.salvar(cliente);
 
         return ResponseEntity.ok(cliente);
     }
@@ -74,7 +79,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
 
-        clienteRepository.deleteById(clienteId);
+        cadastroCliente.excluir(clienteId);
 
         return ResponseEntity.noContent().build();
     }
