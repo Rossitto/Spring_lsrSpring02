@@ -19,7 +19,7 @@ public class GestaoOrdemServicoService {
         ordemServico.setStatus(StatusOrdemServico.ABERTA);
         ordemServico.setDataAbertura(LocalDateTime.now());
 
-        return ordemServicoRepository.save(ordemServico);
+        return (OrdemServico) ordemServicoRepository.save(ordemServico);
     }
 
 }
