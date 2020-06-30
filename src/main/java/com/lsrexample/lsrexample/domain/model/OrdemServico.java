@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -26,7 +25,7 @@ public class OrdemServico {
     private String descricao;
     private BigDecimal preco;
 
-    @Enumerated(EnumType.)
+    @Enumerated(EnumType.STRING)
     private StatusOrdemServico status;
     private LocalDateTime dataAbertura;
     private LocalDateTime dataFinalizacao;
